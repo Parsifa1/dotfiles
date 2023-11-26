@@ -1,0 +1,21 @@
+[class]
+text_default = [
+	{ command = "nvim"}
+]
+
+[extension]
+
+lua.inherit = "text_default"
+cpp.inherit = "text_default"
+c.inherit = "text_default"
+py.inherit = "text_default"
+rs.inherit = "text_default"
+fish.inherit = "text_default"
+json.inherit = "text_default"
+
+[mimetype]
+
+# text/*
+[mimetype.text]
+inherit = "text_default"
+
