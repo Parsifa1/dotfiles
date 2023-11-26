@@ -16,7 +16,7 @@ config.enable_tab_bar = false
 config.font_size = 12
 config.font = wezterm.font_with_fallback {
     { family = "JetBrains Mono", weight = "Regular" },
-    { family = "Symbols Nerd Font Mono", scale = 0.83 },
+    { family = "Symbols Nerd Font Mono", scale = 0.81 },
     { family = "苹方-简", scale = 1.1 }
 }
 config.color_scheme = "Catppuccin Mocha"
