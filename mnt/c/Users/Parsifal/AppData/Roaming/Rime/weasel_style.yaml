@@ -1,0 +1,67 @@
+# weasel.yaml 支持的所有选项及注释，用于配置参考
+# 定制化文档 https://github.com/rime/weasel/wiki/Weasel-定製化
+
+# 在用户使用「输入法设定」调整设置时，小狼毫会格式化 weasel.custom.yaml，删除所有注释。
+# 目前建议的自定义方法：复制此本文件并修改，之后在 weasel.custom.yaml 用 `__include` 引入。示例 weasel.custom.yaml 如下：
+# patch:
+#   "preset_color_schemes/+":
+#     __include: "weasel_style_copy:/preset_color_schemes"
+#   "style/+":
+#     __include: "weasel_style_copy:/style"
+
+style:
+  font_face: "LXGW WenKai"
+  display_tray_icon: false
+  font_point: 13
+  inline_preedit: false
+  horizontal: true
+  color_scheme: 520
+  preedit_type: composition
+  layout:
+    align_type: center
+    max_height: 0
+    max_width: 0
+    min_height: 0
+    min_width: 160
+    type: horizontal
+    border_width: 3
+    margin_x: 12
+    margin_y: 12
+    spacing: 10
+    candidate_spacing: 5
+    hilite_spacing: 4
+    hilite_padding: 2
+    shadow_offset_x: 4
+    shadow_offset_y: 4
+    shadow_radius: 0
+    corner_radius: 8
+    round_corner: 7
+
+# 为特定的应用单独设定选项
+# app_options/wezterm-gui.exe:  # 程序名字全用小寫字母
+#     ascii_mode: true
+app_options:
+  windowsterminal.exe:
+    ascii_mode: true
+  code.exe:
+    ascii_mode: true
+  wezterm-gui.exe:
+    ascii_mode: true
+  emacs.exe:
+    ascii_mode: true
+
+  
+
+preset_color_schemes:
+  520:
+    name: dark_color
+    author: parsifa1 <li.aldric@gmail.com>, based on dark_temple
+    text_color: 0xE2CCFF
+    candidate_text_color: 0xd8e3e6
+    back_color: 0x222222
+    border_color: 0x222222
+    hilited_text_color: 0xffcf9a
+    hilited_back_color: 0x222222
+    hilited_candidate_text_color: 0xE2CCFF
+    hilited_candidate_back_color: 0x333333
+    comment_text_color: 0x606cff 
