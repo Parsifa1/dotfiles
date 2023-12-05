@@ -7,7 +7,8 @@ end
 
 wezterm.on("gui-startup", function(cmd)
 	local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
-	window:gui_window():set_position(200, 100)
+	-- window:gui_window():set_position(200, 100)
+	window:gui_window():set_position(55, 70)
 end)
 config.keys = {
 	{ key = "v", mods = "CTRL", action = wezterm.action.PasteFrom("Clipboard") },
@@ -20,12 +21,15 @@ config.font = wezterm.font_with_fallback {
     { family = "LXGW WenKai", scale = 1.1 }
     -- 中文字体测试
 }
+
+-- close title bar
+config.window_decorations = "RESIZE"
 config.color_scheme = "Catppuccin Mocha"
-config.animation_fps = 10
+config.animation_fps = 60
 config.default_domain = "WSL:Arch"
 config.max_fps = 165
 config.window_close_confirmation = "NeverPrompt"
-config.initial_rows = 45
-config.initial_cols = 180
+config.initial_rows = 47
+config.initial_cols = 200
 
 return config
