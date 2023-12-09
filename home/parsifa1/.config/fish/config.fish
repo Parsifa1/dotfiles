@@ -34,6 +34,8 @@ if status is-interactive
     alias cdf="cd \$(find . -type d | fzf)"
     alias dot='sudo git --git-dir=/.dotfiles/ --work-tree=/'
 
+    # set editor command
+    bind \cx\ce edit_command_buffer
     # set fastfetch
     # if set -q TMUX; and test -n "$TMUX"
     # fastfetch

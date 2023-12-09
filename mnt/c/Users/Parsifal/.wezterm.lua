@@ -18,7 +18,7 @@ config.font_size = 12
 config.font = wezterm.font_with_fallback {
     { family = "JetBrains Mono", weight = "Regular" },
     { family = "Symbols Nerd Font Mono", scale = 0.83 },
-    { family = "LXGW WenKai", scale = 1.1 }
+    { family = "LXGW WenKai", scale = 1.17 }
     -- 中文字体测试
 }
 
@@ -31,5 +31,6 @@ config.max_fps = 165
 config.window_close_confirmation = "NeverPrompt"
 config.initial_rows = 47
 config.initial_cols = 200
+config.window_background_opacity = 0.96
 
 return config
