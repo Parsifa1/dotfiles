@@ -40,15 +40,25 @@ style:
 # 为特定的应用单独设定选项
 # app_options/wezterm-gui.exe:  # 程序名字全用小寫字母
 #     ascii_mode: true
-app_options:
-  windowsterminal.exe:
+app_options/wezterm-gui.exe:
     ascii_mode: true
-  code.exe:
+app_options/code.exe:
     ascii_mode: true
-  wezterm-gui.exe:
+app_options/explorer.exe:
     ascii_mode: true
-  emacs.exe:
+app_options/wsl.exe:
     ascii_mode: true
+app_options/conhost.exe:
+    ascii_mode: true
+
+  # windowsterminal.exe:
+  #   ascii_mode: true
+  # code.exe:
+  #   ascii_mode: true
+  # wezterm-gui.exe:
+  #   ascii_mode: true
+  # emacs.exe:
+  #   ascii_mode: true
 
   
 

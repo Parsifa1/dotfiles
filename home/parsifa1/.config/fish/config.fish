@@ -26,7 +26,9 @@ if status is-interactive
 
     # set alias
     alias cls="clear"
+    alias v="nvim"
     alias vi="nvim"
+    alias vim="nvim"
     alias py="python"
     alias fa="fastfetch"
     alias fm="joshuto"    
