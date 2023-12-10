@@ -38,9 +38,5 @@ if status is-interactive
 
     # set editor command
     bind \cx\ce edit_command_buffer
-    # set fastfetch
-    # if set -q TMUX; and test -n "$TMUX"
-    # fastfetch
-    # end
 end
 
