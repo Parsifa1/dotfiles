@@ -13,8 +13,9 @@ wezterm.on("gui-startup", function(cmd)
 end)
 
 -- custom title name
+---@diagnostic disable-next-line: redefined-local, unused-local
 wezterm.on('format-window-title', function(tab, pane, tabs, panes, config)
-  return "ᕕ( ᐛ )ᕗ"
+  return " ᕕ( ᐛ )ᕗ "
 end)
 
 -- set <C-v> for paste
@@ -32,32 +33,34 @@ config.font = wezterm.font_with_fallback {
 
 -- set front_end    
 local gpus = wezterm.gui.enumerate_gpus()
-config.webgpu_preferred_adapter = gpus[2]
+config.webgpu_preferred_adapter = gpus[1]
 config.front_end = "WebGpu"
 
 -- close title bar
--- config.window_decorations = "RESIZE"
+config.use_fancy_tab_bar = true
+config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
+config.enable_tab_bar = false
 
 -- set transparent
-config.window_background_opacity = 0.96
-config.win32_system_backdrop = "Auto"
+config.window_background_opacity = 0.7
+config.win32_system_backdrop = "Acrylic" -- "Auto" or "Acrylic"
 
 -- set initial size for screens
 local screen_laptop = true
--- screen_laptop = false
+screen_laptop = false
 if screen_laptop then
     config.initial_rows = 39
     config.initial_cols = 170
 else
     config.initial_rows = 47
-    config.initial_cols = 200
+    config.initial_cols = 180
 end
 
 -- others
 config.color_scheme = "Catppuccin Mocha"
+-- config.color_scheme = "gruvbox"
 config.animation_fps = 60
 config.default_domain = "WSL:Arch"
-config.enable_tab_bar = false
 config.font_size = 12
 config.max_fps = 165
 config.window_close_confirmation = "NeverPrompt"
