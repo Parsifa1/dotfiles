@@ -1,26 +1,19 @@
-# set some path
-export PATH="$HOME/.cargo/bin:$PATH"
-export $(dbus-launch)
-export EDITOR=/usr/bin/nvim
-export NODE_OPTIONS="--dns-result-order=ipv4first"  # set nodejs to ipv4 first
-set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin /home/parsifa1/.ghcup/bin $PATH # ghcup-env
-source /opt/miniconda/etc/fish/conf.d/conda.fish
-
 if status is-interactive
     # close fish greeting
     set -U fish_greeting
-
+    export COLUMNS=80
+    export LINES=30
     # set proxy
     git config --global http.proxy "localhost:7891"
     export all_proxy="http://localhost:7891"
 
     # # set some path
-    # export PATH="$HOME/.cargo/bin:$PATH"
-    # export $(dbus-launch)
-    # export EDITOR=/usr/bin/nvim
-    # export NODE_OPTIONS="--dns-result-order=ipv4first"  # set nodejs to ipv4 first
-    # set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin /home/parsifa1/.ghcup/bin $PATH # ghcup-env
-    # source /opt/miniconda/etc/fish/conf.d/conda.fish
+    export PATH="$HOME/.cargo/bin:$PATH"
+    export $(dbus-launch)
+    export EDITOR=/usr/bin/nvim
+    export NODE_OPTIONS="--dns-result-order=ipv4first"  # set nodejs to ipv4 first
+    set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin /home/parsifa1/.ghcup/bin $PATH # ghcup-env
+    source /opt/miniconda/etc/fish/conf.d/conda.fish
 
     # set fzf config
     export FZF_DEFAULT_COMMAND="fd -H -I --exclude={.git,.idea,.vscode,.sass-cache,node_modules,build,.vscode-server,.virtualenvs} --type f"

@@ -17,6 +17,7 @@ style:
   horizontal: true
   color_scheme: 520
   preedit_type: composition
+  ascii_tip_follow_cursor: true  #语言转换跟随鼠标
   layout:
     align_type: center
     max_height: 0
