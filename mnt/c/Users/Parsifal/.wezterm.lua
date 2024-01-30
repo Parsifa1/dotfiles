@@ -1,3 +1,4 @@
+---@diagnostic disable: unused-local, redefined-local
 local wezterm = require("wezterm")
 local config = {}
 if wezterm.config_builder then
@@ -10,6 +11,30 @@ wezterm.on("gui-startup", function(cmd)
 	local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
 	window:gui_window():set_position(55, 45)
 end)
+
+-- set tab title
+wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
+	local pane_title = tab.active_pane.title
+	local user_title = tab.active_pane.user_vars.panetitle
+	if user_title ~= nil and #user_title > 0 then
+		pane_title = user_title
+	end
+	return {
+		{ Background = { Color = "#2d2d3f" } },
+		{ Text = " " .. pane_title .. " " },
+	}
+end)
+
+-- set initial size for screens
+local screen_laptop = true
+-- screen_laptop = false
+if screen_laptop then
+	config.initial_rows = 40
+	config.initial_cols = 152
+else
+	config.initial_rows = 47
+	config.initial_cols = 180
+end
 
 -- custom title name
 ---@diagnostic disable-next-line: redefined-local, unused-local
@@ -33,7 +58,6 @@ config.font = wezterm.font_with_fallback({
 	{ family = "JetBrains Mono" },
 	{ family = "Symbols Nerd Font Mono", scale = 0.83 },
 	{ family = "LXGW WenKai", scale = 1.17 },
-	-- 中文字体测试
 })
 
 -- set front_end
@@ -42,12 +66,15 @@ config.webgpu_power_preference = "HighPerformance"
 
 -- config of tab bar
 config.use_fancy_tab_bar = true
+config.hide_tab_bar_if_only_one_tab = true
+config.show_new_tab_button_in_tab_bar = false
 config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 config.enable_tab_bar = true
 config.window_frame = {
 	font = wezterm.font({ family = "JetBrains Mono", weight = "Bold" }),
 	active_titlebar_bg = "#31313f",
 }
+
 config.colors = {
 	tab_bar = {
 		-- The color of the inactive tab bar edge/divider
@@ -59,18 +86,8 @@ config.colors = {
 config.window_background_opacity = 0.8
 config.win32_system_backdrop = "Acrylic" -- "Auto" or "Acrylic"
 
--- set initial size for screens
-local screen_laptop = true
--- screen_laptop = false
-if screen_laptop then
-	config.initial_rows = 39
-	config.initial_cols = 155
-else
-	config.initial_rows = 47
-	config.initial_cols = 180
-end
-
--- set ssh
+-- set domains
+config.unix_domains = {}
 config.ssh_backend = "Ssh2"
 config.ssh_domains = {
 	{
@@ -103,10 +120,9 @@ config.keys = {
 	{
 		key = "Tab",
 		mods = "CTRL",
-		action = wezterm.action.ShowLauncherArgs({ flags = "LAUNCH_MENU_ITEMS | DOMAINS | TABS" }),
+		action = wezterm.action.ShowLauncherArgs({ flags = "LAUNCH_MENU_ITEMS | DOMAINS" }),
 	},
 }
-
 for i = 1, 8 do
 	-- CTRL+ALT + number to activate that tab
 	table.insert(config.keys, {
@@ -117,10 +133,16 @@ for i = 1, 8 do
 end -- others
 
 config.color_scheme = "Catppuccin Mocha"
-config.animation_fps = 60
+config.animation_fps = 165
 config.default_domain = "WSL:Arch"
-config.font_size = 12.3
+config.font_size = 12.4
 config.max_fps = 165
 config.window_close_confirmation = "NeverPrompt"
+config.window_padding = {
+	left = "0.4cell",
+	right = "0.25cell",
+	top = "0.25cell",
+	bottom = "0cell",
+}
 
 return config
