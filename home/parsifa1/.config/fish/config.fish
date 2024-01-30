@@ -1,4 +1,5 @@
 if status is-interactive
+
     # close fish greeting
     set -U fish_greeting
     export COLUMNS=80
@@ -25,17 +26,30 @@ if status is-interactive
     # set starship
     starship init fish | source
 
+    # set atuin
+    atuin init fish | source
+
+    #set zoxide
+    zoxide init fish | source
+
     # set alias
     alias cls="clear"
     alias v="nvim"
     alias vi="nvim"
-    # alias vim="nvim"
     alias py="python"
     alias fa="fastfetch"
-    alias jo="joshuto"    
+    alias ya="yazi"    
     alias vif="vi \$(fzf --preview 'bat --style=numbers --color=always --line-range :500 {}')"
     alias cdf="cd \$(find . -type d | fzf)"
     alias dot='sudo git --git-dir=/.dotfiles/ --work-tree=/'
+
+    # set Wezterm tabname
+    function set_panetitle
+        set -gx panetitle "Arch"
+        echo -n (printf "\033]1337;SetUserVar=panetitle=%s\007" (echo -n $panetitle | base64))
+    end
+
+    set_panetitle
 
 end
 
