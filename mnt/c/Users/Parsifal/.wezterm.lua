@@ -7,7 +7,6 @@ end
 
 -- set startup window position
 wezterm.on("gui-startup", function(cmd)
-	---@diagnostic disable-next-line: unused-local
 	local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
 	window:gui_window():set_position(55, 45)
 end)
@@ -16,21 +15,29 @@ end)
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
 	local pane_title = tab.active_pane.title
 	local user_title = tab.active_pane.user_vars.panetitle
+	local foreground = "#808080"
 	if user_title ~= nil and #user_title > 0 then
 		pane_title = user_title
 	end
+	if tab.is_active then
+		foreground = "white"
+	end
+
 	return {
 		{ Background = { Color = "#2d2d3f" } },
+		{ Foreground = { Color = foreground } },
 		{ Text = " " .. pane_title .. " " },
 	}
 end)
+
+config.enable_kitty_graphics = true
 
 -- set initial size for screens
 local screen_laptop = true
 -- screen_laptop = false
 if screen_laptop then
-	config.initial_rows = 40
-	config.initial_cols = 152
+	config.initial_rows = 39
+	config.initial_cols = 150
 else
 	config.initial_rows = 47
 	config.initial_cols = 180
@@ -83,12 +90,12 @@ config.colors = {
 }
 
 -- set transparent
-config.window_background_opacity = 0.8
-config.win32_system_backdrop = "Acrylic" -- "Auto" or "Acrylic"
+config.window_background_opacity = 0.9935
+config.win32_system_backdrop = "Auto" -- "Auto" or "Acrylic"
 
 -- set domains
 config.unix_domains = {}
-config.ssh_backend = "Ssh2"
+-- config.ssh_backend = "Ssh2"
 config.ssh_domains = {
 	{
 		name = "myserver",
@@ -99,7 +106,19 @@ config.ssh_domains = {
 		assume_shell = "Posix",
 		local_echo_threshold_ms = 50000,
 	},
+	{
+		name = "Arch",
+		remote_address = "127.0.0.1:11451",
+		multiplexing = "None",
+		username = "parsifa1",
+		default_prog = { "fish" },
+		assume_shell = "Posix",
+		no_agent_auth = true,
+	},
 }
+
+-- config wsl_domains
+config.wsl_domains = {}
 
 -- launch_menu
 local launch_menu = {}
@@ -122,6 +141,16 @@ config.keys = {
 		mods = "CTRL",
 		action = wezterm.action.ShowLauncherArgs({ flags = "LAUNCH_MENU_ITEMS | DOMAINS" }),
 	},
+	{
+		key = '"',
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
+	},
+	{
+		key = ':',
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+	},
 }
 for i = 1, 8 do
 	-- CTRL+ALT + number to activate that tab
@@ -131,10 +160,11 @@ for i = 1, 8 do
 		action = wezterm.action.ActivateTab(i - 1),
 	})
 end -- others
-
-config.color_scheme = "Catppuccin Mocha"
+-- config.ssh_domains = wezterm.default_ssh_domains()
+config.color_scheme = "Catppuccin Mocha (Gogh)"
+config.term = "wezterm"
 config.animation_fps = 165
-config.default_domain = "WSL:Arch"
+config.default_domain = "Arch"
 config.font_size = 12.4
 config.max_fps = 165
 config.window_close_confirmation = "NeverPrompt"
