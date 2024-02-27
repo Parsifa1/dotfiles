@@ -4,11 +4,9 @@ customization:
   generator: "Weasel::UIStyleSettings"
   modified_time: "Mon Oct  9 04:50:46 2023"
   rime_version: 1.8.5
-patch:
+patch: #补丁
   "preset_color_schemes/+":
     __include: "weasel_style:/preset_color_schemes"
   "style/+":
     __include: "weasel_style:/style"
-  ascii_composer/switch_key/Esc: commit_code
-  ascii_composer/switch_key/Shift_R: commit_code
-  translator/preedit_format: []
+  __include: "weasel_style:/app_opt"

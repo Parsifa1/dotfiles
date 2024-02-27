@@ -8,16 +8,15 @@
 #     __include: "weasel_style_copy:/preset_color_schemes"
 #   "style/+":
 #     __include: "weasel_style_copy:/style"
-
 style:
   font_face: "LXGW WenKai"
   display_tray_icon: false
   font_point: 13
   inline_preedit: false
   horizontal: true
-  color_scheme: 520
+  color_scheme: dark_color
   preedit_type: composition
-  ascii_tip_follow_cursor: true  #语言转换跟随鼠标
+  ascii_tip_follow_cursor: false #语言转换跟随鼠标
   layout:
     align_type: center
     max_height: 0
@@ -38,33 +37,26 @@ style:
     corner_radius: 8
     round_corner: 7
 
-# 为特定的应用单独设定选项
-# app_options/wezterm-gui.exe:  # 程序名字全用小寫字母
-#     ascii_mode: true
-app_options/wezterm-gui.exe:
-    ascii_mode: true
-app_options/code.exe:
-    ascii_mode: true
-app_options/explorer.exe:
-    ascii_mode: true
-app_options/wsl.exe:
-    ascii_mode: true
-app_options/conhost.exe:
-    ascii_mode: true
-
-  # windowsterminal.exe:
-  #   ascii_mode: true
-  # code.exe:
-  #   ascii_mode: true
-  # wezterm-gui.exe:
-  #   ascii_mode: true
-  # emacs.exe:
-  #   ascii_mode: true
-
-  
+app_opt:
+  app_options/wezterm-gui.exe:
+      ascii_mode: true
+  app_options/code.exe:
+      ascii_mode: true
+  app_options/explorer.exe:
+      ascii_mode: true
+  app_options/wsl.exe:
+      ascii_mode: true
+  app_options/conhost.exe:
+      ascii_mode: true
+  windowsterminal.exe:
+      ascii_mode: true
+  PowerToys.PowerLauncher.exe:
+      ascii_mode: true
+  PowerToys.exe:
+      ascii_mode: true
 
 preset_color_schemes:
-  520:
+  dark_color:
     name: dark_color
     author: parsifa1 <li.aldric@gmail.com>, based on dark_temple
     text_color: 0xE2CCFF
@@ -75,4 +67,4 @@ preset_color_schemes:
     hilited_back_color: 0x222222
     hilited_candidate_text_color: 0xE2CCFF
     hilited_candidate_back_color: 0x333333
-    comment_text_color: 0x606cff 
+    comment_text_color: 0x606cff
