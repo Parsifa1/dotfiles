@@ -7,7 +7,7 @@ cwd = { fg = "#94e2d5" }
 
 # Hovered
 hovered         = { fg = "#1e1e2e", bg = "#89b4fa" }
-preview_hovered = { underline = true }
+preview_hovered = { underline = false }
 
 # Find
 find_keyword  = { fg = "#f9e2af", italic = true }
@@ -24,7 +24,7 @@ tab_inactive = { fg = "#cdd6f4", bg = "#45475a" }
 tab_width    = 1
 
 # Border
-border_symbol = "│"
+border_symbol = " "
 border_style  = { fg = "#7f849c" }
 
 # Highlighting
