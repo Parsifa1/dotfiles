@@ -76,7 +76,7 @@ config.colors = {
 }
 
 -- set transparent
-config.window_background_opacity = 0.70
+config.window_background_opacity = 0.83
 config.win32_system_backdrop = "Acrylic" -- "Auto" or "Acrylic"
 
 -- set domains
