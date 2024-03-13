@@ -20,16 +20,17 @@ if status is-interactive
     alias py="python"
     alias fa="fastfetch"
     alias ls="exa --icons -F"
-    alias ya="yazi"    
-    alias vf="vi \$(fzf --preview 'bat --style=numbers --color=always --line-range :500 {}')"
-    alias zf="cd \$(find . -type d 2>/dev/null| fzf)"
+    alias vf="set -l file (fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'); and test -n \"\$file\"; and vi \"\$file\""
+    alias zf="z \$(fd --type d --hidden . 2>/dev/null | fzf)"
     alias du="dust"
     alias dot='sudo git --git-dir=/.dotfiles/ --work-tree=/'
 
+    # fix wslg
+    export DISPLAY=":0"
+    export WAYLAND_DISPLAY=wayland-0    #fix wayland
 
     # set some path & env
     export TERM=wezterm
-    export DISPLAY=:0
     export PATH="$HOME/.cargo/bin:$PATH"
     export PATH="/home/parsifa1/.local/bin:$PATH"
     export $(dbus-launch)
@@ -64,6 +65,16 @@ if status is-interactive
     # set fzf config
     export FZF_DEFAULT_COMMAND="fd -H -I --exclude={.git,.idea,.vscode,.sass-cache,node_modules,build,.vscode-server,.virtualenvs} --type f"
     export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --color=bg+:,bg:,gutter:-1,spinner:#f5e0dc,hl:#f38ba8 --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
+
+    #set yazi wrapper
+    function ya
+        set tmp (mktemp -t "yazi-cwd.XXXXX")
+        yazi $argv --cwd-file="$tmp"
+        if set cwd (cat -- "$tmp"); and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+            cd -- "$cwd"
+        end
+        rm -f -- "$tmp"
+    end
 
     # set Wezterm tabname
     function set_panetitle

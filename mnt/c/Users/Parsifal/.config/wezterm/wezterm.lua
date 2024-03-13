@@ -1,9 +1,6 @@
 ---@diagnostic disable: unused-local, redefined-local
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
-if wezterm.config_builder then
-	config = wezterm.config_builder()
-end
 
 -- set startup window position
 wezterm.on("gui-startup", function(cmd)
@@ -47,9 +44,10 @@ end)
 
 -- font
 config.font = wezterm.font_with_fallback({
-	{ family = "JetBrains Mono" },
-	{ family = "Symbols Nerd Font Mono", scale = 0.83 },
-	{ family = "LXGW WenKai", scale = 1.17 },
+	-- { family = "JetBrains Mono" },
+	{ family = "Iosevka Cloudtide" },
+	{ family = "Symbols Nerd Font Mono", scale = 0.85 },
+	{ family = "LXGW WenKai", scale = 1.05 },	--中文测试
 	{ family = "Cambria Math", scale = 1.0 },
 })
 
@@ -84,7 +82,7 @@ config.unix_domains = {}
 config.ssh_domains = {
 	{
 		name = "MyServer",
-		remote_address = "192.131.142.134",
+		remote_address = "192.131.142.134:11451",
 		multiplexing = "None",
 		username = "parsifa1",
 		default_prog = { "fish" },
@@ -121,6 +119,7 @@ end
 config.launch_menu = launch_menu
 
 -- key config
+config.leader = { key = "w", mods = "ALT", timeout_milliseconds = 5000 }
 config.keys = {
 	-- set <C-v> for paste
 	{
@@ -143,15 +142,37 @@ config.keys = {
 		action = wezterm.action.ShowLauncherArgs({ flags = "LAUNCH_MENU_ITEMS | DOMAINS" }),
 	},
 	{
-		key = '"',
-		mods = "CTRL|SHIFT",
+		key = ";",
+		mods = "LEADER",
 		action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
 	},
 	{
-		key = ":",
-		mods = "CTRL|SHIFT",
+		key = "'",
+		mods = "LEADER",
 		action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
 	},
+	{
+		key = "d",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.SwitchToWorkspace({
+			name = "default",
+		}),
+	},
+	{
+		key = "m",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.SwitchToWorkspace({
+			name = "monitoring",
+			spawn = {
+				args = { "btop" },
+			},
+		}),
+	},
+	-- Change Active Pane
+	{ key = "h", mods = "LEADER", action = wezterm.action.ActivatePaneDirection("Left") },
+	{ key = "l", mods = "LEADER", action = wezterm.action.ActivatePaneDirection("Right") },
+	{ key = "k", mods = "LEADER", action = wezterm.action.ActivatePaneDirection("Up") },
+	{ key = "j", mods = "LEADER", action = wezterm.action.ActivatePaneDirection("Down") },
 }
 for i = 1, 8 do
 	-- CTRL+ALT + number to activate that tab
@@ -165,7 +186,7 @@ end -- others
 config.color_scheme = "Catppuccin Mocha (Gogh)"
 config.animation_fps = 165
 config.default_domain = "Arch"
-config.font_size = 12.4
+config.font_size = 13.8
 config.max_fps = 165
 config.enable_kitty_graphics = true
 config.window_close_confirmation = "NeverPrompt"
